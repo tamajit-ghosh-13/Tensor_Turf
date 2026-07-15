@@ -1,0 +1,93 @@
+{
+  "match_id": "7038cad69add49f38b5290bcd9bfed29",
+  "teams": {
+    "home": "Unified Hybrid Team",
+    "away": "Demo"
+  },
+  "score": {
+    "home": 3,
+    "away": 2
+  },
+  "winner": "home",
+  "winner_name": "Unified Hybrid Team",
+  "decided_by": "regulation",
+  "shootout": null,
+  "duration_ticks": 1800,
+  "duration": "90:00",
+  "stats": {
+    "possession_pct": {
+      "home": 44.4,
+      "away": 55.6
+    },
+    "shots": {
+      "home": 4,
+      "away": 10
+    },
+    "shots_on_target": {
+      "home": 3,
+      "away": 4
+    },
+    "passes": {
+      "home": 0,
+      "away": 1
+    },
+    "corners": {
+      "home": 0,
+      "away": 0
+    },
+    "offsides": {
+      "home": 0,
+      "away": 0
+    },
+    "throw_ins": {
+      "home": 0,
+      "away": 0
+    },
+    "goal_kicks": {
+      "home": 0,
+      "away": 1
+    },
+    "tackles": {
+      "home": 20,
+      "away": 7
+    }
+  },
+  "goals": [
+    {
+      "tick": 973,
+      "clock": "48:39",
+      "half": "2",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 1005,
+      "clock": "50:15",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 1038,
+      "clock": "51:54",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 1163,
+      "clock": "58:09",
+      "half": "2",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 1232,
+      "clock": "61:36",
+      "half": "2",
+      "team": "home",
+      "scorer": null
+    }
+  ],
+  "generated_at": null
+}

@@ -108,50 +108,68 @@ class DQNAgent:
         self.eps = max(self.eps_min, self.eps * self.eps_decay)
 
 def my_reward(prev_obs, action, obs, info, team, slot) -> float:
+    # 1. The Terminal Anchor (Match Score)
     other = "B" if team == "A" else "A"
     prev = info.get("_prev_score", {"A": 0, "B": 0})
     now = info["score"]
     reward = 40.0 * (now[team] - prev[team]) - 40.0 * (now[other] - prev[other])
 
+    # 2. Extract Current Agent's Data
     my_agent = next((a for a in info.get("agents", []) if a.get("slot") == slot), {})
+    has_ball = my_agent.get("has_ball", False)
     
+    # 3. Goalkeeper Logic (Slot 0)
     if slot == 0:
         gk_x = my_agent.get("gk_x")
         if gk_x is not None:
-            if team == "A" and gk_x > -0.8: 
-                reward -= 2.0 * (gk_x - (-0.9))
-            elif team == "B" and gk_x < 0.8:
-                reward -= 2.0 * (0.9 - gk_x)
-        
-        ball_dist = my_agent.get("ball_distance")
-        if ball_dist is not None and ball_dist < 0.3:
-            prev_dist = info.get("_prev_ball_dist", ball_dist)
-            if prev_dist is None: prev_dist = ball_dist
-            reward += (prev_dist - ball_dist) * 0.5
-        return float(reward)
+            # Penalise the keeper for going on a walkabout (leaving the penalty box)
+            # Team A defends X=0, Team B defends X=100.
+            if team == "A" and gk_x > 15.0:
+                reward -= 1.0
+            elif team == "B" and gk_x < 85.0:
+                reward -= 1.0
+        return float(reward) # Keep the GK focused purely on saves and positioning
 
-    has_ball = my_agent.get("has_ball", False)
+    # 4. Outfield Players: Possession & Forward Progress
     ball_dist = my_agent.get("ball_distance")
     
     if has_ball:
-        reward += 0.25
+        # Very small possession trickle to avoid reward hacking (was 0.25, now 0.05)
+        reward += 0.05 
+        
+        # Solid reward for driving the ball up the pitch
         attack_dx = 1.0 if team == "A" else -1.0
         ori = my_agent.get("orientation", 0.0)
         reward += max(0.0, math.cos(math.radians(ori)) * attack_dx) * 0.4
+        
     elif ball_dist is not None:
-        prev_d = info.get("_prev_ball_dist")
-        if prev_d is not None and ball_dist < 0.5:
-            all_dists = [a.get("ball_distance", 999.0) for a in info.get("agents", []) if a.get("ball_distance") is not None]
-            if all_dists and ball_dist <= min(all_dists) + 0.05:
-                reward += (prev_d - ball_dist) * 0.1
-                
+        # Swarm Prevention: Only reward closing down the ball if you are the closest
+        all_dists = [a.get("ball_distance", 999.0) for a in info.get("agents", []) if a.get("ball_distance") is not None]
+        if all_dists and ball_dist <= min(all_dists) + 0.5:
+            prev_d = info.get("_prev_ball_dist")
+            if prev_d is not None and ball_dist < prev_d:
+                reward += (prev_d - ball_dist) * 0.2
+
+    # 5. The Strike & Pass Incentives (Action Priors)
     acts = list(action) if hasattr(action, "__len__") else [int(action)]
     for a in acts:
         try:
-            a = int(a)
+            a_idx = int(a)
         except (TypeError, ValueError):
             continue
-        reward += 0.10 if a == 9 else 0.08 if a == 10 else -0.02 if a == 8 else 0.0
+        
+        if has_ball:
+            if a_idx == 9:      # SHOOT
+                reward += 1.5   # Massive bonus to cure the hesitation to shoot!
+            elif a_idx == 10:   # PASS
+                reward += 0.5   # Solid bonus to keep the ball moving
+        elif a_idx == 8:        # ROTATE
+            reward -= 0.02      # Tiny penalty for just spinning on the spot
+
+    # 6. Team Penalty for Losing the Ball
+    any_ball = any(a.get("has_ball") for a in info.get("agents", []))
+    if info.get("_prev_has_ball") and not any_ball:
+        reward -= 0.8
 
     return float(reward)
 

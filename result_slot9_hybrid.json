@@ -1,0 +1,65 @@
+{
+  "match_id": "34c5cbb5fd064c2fb9c428f7e2be64ad",
+  "teams": {
+    "home": "Slot 9 Hybrid",
+    "away": "Demo"
+  },
+  "score": {
+    "home": 1,
+    "away": 0
+  },
+  "winner": "home",
+  "winner_name": "Slot 9 Hybrid",
+  "decided_by": "overtime",
+  "shootout": null,
+  "duration_ticks": 1877,
+  "duration": "93:51",
+  "stats": {
+    "possession_pct": {
+      "home": 10.2,
+      "away": 89.8
+    },
+    "shots": {
+      "home": 2,
+      "away": 0
+    },
+    "shots_on_target": {
+      "home": 1,
+      "away": 0
+    },
+    "passes": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 0,
+      "away": 0
+    },
+    "offsides": {
+      "home": 0,
+      "away": 0
+    },
+    "throw_ins": {
+      "home": 0,
+      "away": 0
+    },
+    "goal_kicks": {
+      "home": 0,
+      "away": 2
+    },
+    "tackles": {
+      "home": 6,
+      "away": 2
+    }
+  },
+  "goals": [
+    {
+      "tick": 1877,
+      "clock": "93:51",
+      "half": "ET",
+      "team": "home",
+      "scorer": null
+    }
+  ],
+  "generated_at": null
+}
