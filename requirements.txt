@@ -1,0 +1,52 @@
+# Tensor On The Turf — participant local environment
+# ============================================================================
+# These are the EXACT library versions that run on the competition's training
+# GPU (eGPU) and match/inference machines. Install them into a fresh virtual
+# environment so what you test locally is bit-for-bit what the platform runs —
+# no "works on my machine" version drift, no import/serialization surprises.
+#
+# REQUIRES PYTHON 3.12  (the engine is shipped as 3.12 bytecode in api/*.pyc and
+# will NOT import on any other Python minor version).
+#
+#   python3.12 -m venv .venv
+#   source .venv/bin/activate            # Windows: .venv\Scripts\activate
+#   pip install -r requirements.txt
+#   python validate_submission.py ./my_submission
+#
+# torch: pin the release VERSION only. pip fetches the right build for your
+# machine — a CPU/Metal wheel locally, the CUDA wheel on the GPU box — both the
+# same 2.5.1 release, so weights you save load identically on the server.
+#
+# TensorFlow / JAX: on the competition VM these run on CPU (their CUDA wheels
+# pull different nvidia-cudnn versions than torch's and can't be installed side
+# by side, so torch keeps the GPU). Same applies locally — that's fine for
+# building/testing a model; only your final weights need to load on the server.
+
+# ---- core stack (required) -------------------------------------------------
+torch==2.5.1
+numpy==2.0.2                # pinned <2.1 for TensorFlow compatibility
+gymnasium==1.0.0
+
+# ---- classic ML / numerics -------------------------------------------------
+scipy==1.14.1
+pandas==2.2.3
+scikit-learn==1.5.2
+
+# ---- TensorFlow / Keras ----------------------------------------------------
+# macOS ships as plain `tensorflow`; Linux/Windows use the CPU build to avoid a
+# CUDA-wheel clash with torch (same 2.18.0 release either way).
+tensorflow==2.18.0 ; sys_platform == "darwin"
+tensorflow-cpu==2.18.0 ; sys_platform != "darwin"
+keras==3.15.0
+
+# ---- JAX ecosystem (CPU build — matches the VM) ----------------------------
+jax==0.4.38
+jaxlib==0.4.38
+flax==0.10.4
+optax==0.2.5
+chex==0.1.90
+
+# Only libraries listed here are installed on the training/inference machines,
+# so your agents.py / train_rl_agent.py may import ONLY from this file (+ the
+# Python standard library and the kit's own `api` package). Anything else is
+# rejected at upload and would crash on the VM.
