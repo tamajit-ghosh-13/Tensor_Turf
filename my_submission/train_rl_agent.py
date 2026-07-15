@@ -25,10 +25,12 @@ except ImportError:
     from fifa_ai_world_cup.agents import extract_features, ACTION_DIM  # type: ignore
 
 SQUAD_SIZE = 11
-STATE_DIM = 30  # Updated from 20
+STATE_DIM = 36  # 20 default + 10 teammate features + 6 opponent features
 
 def my_features(state: dict) -> list[float]:
     feats = extract_features(state)
+    
+    # 1. Teammate Radar (Top 5 closest)
     teammates = [obj for obj in state.get('visible_objects', []) if obj.get('type') == 'teammate']
     teammates.sort(key=lambda x: x.get('rel_distance', 999.0))
     for i in range(5):
@@ -38,6 +40,18 @@ def my_features(state: dict) -> list[float]:
             feats.append(tm.get('rel_angle', 0.0) / 180.0)
         else:
             feats.extend([0.0, 0.0])
+            
+    # 2. Opponent Radar (Top 3 closest) — Brand New!
+    opponents = [obj for obj in state.get('visible_objects', []) if obj.get('type') == 'opponent']
+    opponents.sort(key=lambda x: x.get('rel_distance', 999.0))
+    for i in range(3):
+        if i < len(opponents):
+            op = opponents[i]
+            feats.append(op.get('rel_distance', 0.0) / 40.0)
+            feats.append(op.get('rel_angle', 0.0) / 180.0)
+        else:
+            feats.extend([0.0, 0.0])
+            
     return feats
 
 class QNetwork(nn.Module):
@@ -120,15 +134,16 @@ def my_reward(prev_obs, action, obs, info, team, slot) -> float:
     
     # 3. Goalkeeper Logic (Slot 0)
     if slot == 0:
-        gk_x = my_agent.get("gk_x")
-        if gk_x is not None:
-            # Penalise the keeper for going on a walkabout (leaving the penalty box)
-            # Team A defends X=0, Team B defends X=100.
-            if team == "A" and gk_x > 15.0:
-                reward -= 1.0
-            elif team == "B" and gk_x < 85.0:
-                reward -= 1.0
-        return float(reward) # Keep the GK focused purely on saves and positioning
+        # Penalise the keeper if they venture too far away from the ball's trajectory,
+        # or if they are aggressively pressing when the ball is far away.
+        ball_dist = my_agent.get("ball_distance")
+        if ball_dist is not None and ball_dist > 15.0:
+            # If the ball is far down the pitch, the keeper must stay put.
+            # Give a small deduction if they select a MOVE action (0-7) instead of IDLE/DEFLECT
+            acts = list(action) if hasattr(action, "__len__") else [int(action)]
+            if any(0 <= int(a) <= 7 for a in acts):
+                reward -= 0.1
+        return float(reward)
 
     # 4. Outfield Players: Possession & Forward Progress
     ball_dist = my_agent.get("ball_distance")
@@ -160,9 +175,20 @@ def my_reward(prev_obs, action, obs, info, team, slot) -> float:
         
         if has_ball:
             if a_idx == 9:      # SHOOT
-                reward += 1.5   # Massive bonus to cure the hesitation to shoot!
+                # Find the opponent's goal in the visible objects
+                visible_goals = [obj for obj in obs.get('visible_objects', []) if 'goal' in str(obj.get('type', ''))]
+                
+                if visible_goals:
+                    closest_goal_dist = min(g.get('rel_distance', 999.0) for g in visible_goals)
+                    if closest_goal_dist < 25.0:  # Only reward shooting when in a sensible attacking range!
+                        reward += 2.0
+                    else:
+                        reward += 0.2  # Minor encouragement, but don't waste it from deep
+                else:
+                    reward -= 0.2  # Penalise shooting blindly when the goal isn't even in sight!
+            
             elif a_idx == 10:   # PASS
-                reward += 0.5   # Solid bonus to keep the ball moving
+                reward += 0.5
         elif a_idx == 8:        # ROTATE
             reward -= 0.02      # Tiny penalty for just spinning on the spot
 

@@ -1,0 +1,121 @@
+{
+  "match_id": "07815435327242c59077d4b92b684ee1",
+  "teams": {
+    "home": "Contextual Hybrid",
+    "away": "Demo"
+  },
+  "score": {
+    "home": 6,
+    "away": 3
+  },
+  "winner": "home",
+  "winner_name": "Contextual Hybrid",
+  "decided_by": "regulation",
+  "shootout": null,
+  "duration_ticks": 1800,
+  "duration": "90:00",
+  "stats": {
+    "possession_pct": {
+      "home": 26.4,
+      "away": 73.6
+    },
+    "shots": {
+      "home": 8,
+      "away": 9
+    },
+    "shots_on_target": {
+      "home": 6,
+      "away": 4
+    },
+    "passes": {
+      "home": 0,
+      "away": 6
+    },
+    "corners": {
+      "home": 0,
+      "away": 0
+    },
+    "offsides": {
+      "home": 0,
+      "away": 0
+    },
+    "throw_ins": {
+      "home": 0,
+      "away": 1
+    },
+    "goal_kicks": {
+      "home": 1,
+      "away": 2
+    },
+    "tackles": {
+      "home": 26,
+      "away": 13
+    }
+  },
+  "goals": [
+    {
+      "tick": 48,
+      "clock": "02:24",
+      "half": "1",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 160,
+      "clock": "08:00",
+      "half": "1",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 193,
+      "clock": "09:39",
+      "half": "1",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 225,
+      "clock": "11:15",
+      "half": "1",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 314,
+      "clock": "15:42",
+      "half": "1",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 385,
+      "clock": "19:15",
+      "half": "1",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 476,
+      "clock": "23:48",
+      "half": "1",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 975,
+      "clock": "48:45",
+      "half": "2",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 1062,
+      "clock": "53:06",
+      "half": "2",
+      "team": "home",
+      "scorer": null
+    }
+  ],
+  "generated_at": null
+}

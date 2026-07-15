@@ -29,10 +29,12 @@ except ImportError:
 
 SQUAD_SIZE = 11
 WEIGHTS_DIR = os.environ.get("WEIGHTS_DIR", "weights")
-STATE_DIM = 30  # Updated from 20
+STATE_DIM = 36  # 20 default + 10 teammate features + 6 opponent features
 
 def my_features(state: dict) -> list[float]:
     feats = extract_features(state)
+    
+    # 1. Teammate Radar (Top 5 closest)
     teammates = [obj for obj in state.get('visible_objects', []) if obj.get('type') == 'teammate']
     teammates.sort(key=lambda x: x.get('rel_distance', 999.0))
     for i in range(5):
@@ -42,6 +44,18 @@ def my_features(state: dict) -> list[float]:
             feats.append(tm.get('rel_angle', 0.0) / 180.0)
         else:
             feats.extend([0.0, 0.0])
+            
+    # 2. Opponent Radar (Top 3 closest) — Brand New!
+    opponents = [obj for obj in state.get('visible_objects', []) if obj.get('type') == 'opponent']
+    opponents.sort(key=lambda x: x.get('rel_distance', 999.0))
+    for i in range(3):
+        if i < len(opponents):
+            op = opponents[i]
+            feats.append(op.get('rel_distance', 0.0) / 40.0)
+            feats.append(op.get('rel_angle', 0.0) / 180.0)
+        else:
+            feats.extend([0.0, 0.0])
+            
     return feats
 
 if _TORCH:
