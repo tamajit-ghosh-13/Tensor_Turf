@@ -1,0 +1,65 @@
+{
+  "match_id": "fcf1f1fae56f4edc926480177b4973b9",
+  "teams": {
+    "home": "MARL Hybrid",
+    "away": "Demo"
+  },
+  "score": {
+    "home": 1,
+    "away": 0
+  },
+  "winner": "home",
+  "winner_name": "MARL Hybrid",
+  "decided_by": "regulation",
+  "shootout": null,
+  "duration_ticks": 1800,
+  "duration": "90:00",
+  "stats": {
+    "possession_pct": {
+      "home": 98.3,
+      "away": 1.7
+    },
+    "shots": {
+      "home": 1,
+      "away": 0
+    },
+    "shots_on_target": {
+      "home": 1,
+      "away": 0
+    },
+    "passes": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 0,
+      "away": 0
+    },
+    "offsides": {
+      "home": 0,
+      "away": 0
+    },
+    "throw_ins": {
+      "home": 0,
+      "away": 0
+    },
+    "goal_kicks": {
+      "home": 1,
+      "away": 0
+    },
+    "tackles": {
+      "home": 6,
+      "away": 2
+    }
+  },
+  "goals": [
+    {
+      "tick": 83,
+      "clock": "04:09",
+      "half": "1",
+      "team": "home",
+      "scorer": null
+    }
+  ],
+  "generated_at": null
+}

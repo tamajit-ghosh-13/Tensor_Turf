@@ -1,0 +1,149 @@
+{
+  "match_id": "85c0ab52320343e3a4795d67fb8c17ff",
+  "teams": {
+    "home": "Full RL Team",
+    "away": "Demo"
+  },
+  "score": {
+    "home": 1,
+    "away": 12
+  },
+  "winner": "away",
+  "winner_name": "Demo",
+  "decided_by": "regulation",
+  "shootout": null,
+  "duration_ticks": 1800,
+  "duration": "90:00",
+  "stats": {
+    "possession_pct": {
+      "home": 14.6,
+      "away": 85.4
+    },
+    "shots": {
+      "home": 0,
+      "away": 19
+    },
+    "shots_on_target": {
+      "home": 0,
+      "away": 13
+    },
+    "passes": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 0,
+      "away": 0
+    },
+    "offsides": {
+      "home": 0,
+      "away": 0
+    },
+    "throw_ins": {
+      "home": 0,
+      "away": 0
+    },
+    "goal_kicks": {
+      "home": 7,
+      "away": 0
+    },
+    "tackles": {
+      "home": 8,
+      "away": 1
+    }
+  },
+  "goals": [
+    {
+      "tick": 932,
+      "clock": "46:36",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 985,
+      "clock": "49:15",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 1019,
+      "clock": "50:57",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 1052,
+      "clock": "52:36",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 1086,
+      "clock": "54:18",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 1120,
+      "clock": "56:00",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 1153,
+      "clock": "57:39",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 1186,
+      "clock": "59:18",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 1220,
+      "clock": "61:00",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 1254,
+      "clock": "62:42",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 1287,
+      "clock": "64:21",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 1375,
+      "clock": "68:45",
+      "half": "2",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 1408,
+      "clock": "70:24",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    }
+  ],
+  "generated_at": null
+}

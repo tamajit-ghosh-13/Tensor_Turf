@@ -1,32 +1,3 @@
-"""
-train_rl_agent.py  —  COMPLETE, RUNNABLE reference trainer
-==========================================================
-This is a *working* example (not a skeleton).  Copy this whole ``starter/``
-folder, tweak it, and submit ``agents.py`` + ``train_rl_agent.py``.
-
-What it does
-------------
-Trains one small DQN per squad slot (0..10, GK included) on the Gymnasium
-environment and saves 11 weight files ``agent_00_dqn.pt`` … ``agent_10_dqn.pt``
-into the directory the organiser points ``SAVE_MODEL`` at.  The matching
-``agents.py`` in this folder loads those files at match time.
-
-It uses the **default** observation (20 floats) and action space (13 discrete),
-so the network is ``STATE_DIM -> 64 -> 64 -> ACTION_DIM``.  None of that is
-required by the platform — see TRAINING_GUIDE.md §3 and §8 to bring your own
-observation / action space / algorithm.  If you change anything here, change
-``agents.py`` to match.
-
-Run locally
------------
-    pip install torch gymnasium numpy
-    python train_rl_agent.py --episodes 20 --ticks 400 --seed 42
-    # or a single slot while iterating:
-    python train_rl_agent.py --slots 5 --episodes 30
-
-The organiser runs it headless with env vars EPISODES / TICKS / SEED / SAVE_MODEL.
-"""
-
 from __future__ import annotations
 
 import math
@@ -47,18 +18,28 @@ except ImportError:
 
 import gymnasium as gym
 try:
-    import api.gym_env  # noqa: F401  — registers "FIFAWorldCupAgent-v0"
-    from api.agents import STATE_DIM, ACTION_DIM  # defaults: 20 and 13
+    import api.gym_env  # noqa: F401
+    from api.agents import extract_features, ACTION_DIM
 except ImportError:
     import fifa_ai_world_cup.gym_env  # type: ignore # noqa: F401
-    from fifa_ai_world_cup.agents import STATE_DIM, ACTION_DIM  # type: ignore
+    from fifa_ai_world_cup.agents import extract_features, ACTION_DIM  # type: ignore
 
 SQUAD_SIZE = 11
+STATE_DIM = 30  # Updated from 20
 
+def my_features(state: dict) -> list[float]:
+    feats = extract_features(state)
+    teammates = [obj for obj in state.get('visible_objects', []) if obj.get('type') == 'teammate']
+    teammates.sort(key=lambda x: x.get('rel_distance', 999.0))
+    for i in range(5):
+        if i < len(teammates):
+            tm = teammates[i]
+            feats.append(tm.get('rel_distance', 0.0) / 40.0)
+            feats.append(tm.get('rel_angle', 0.0) / 180.0)
+        else:
+            feats.extend([0.0, 0.0])
+    return feats
 
-# ---------------------------------------------------------------------------
-# 1. The Q-network.  Any architecture is fine — this MUST match agents.py.
-# ---------------------------------------------------------------------------
 class QNetwork(nn.Module):
     def __init__(self, state_dim: int = STATE_DIM, action_dim: int = ACTION_DIM):
         super().__init__()
@@ -71,10 +52,6 @@ class QNetwork(nn.Module):
     def forward(self, x):
         return self.net(x)
 
-
-# ---------------------------------------------------------------------------
-# 2. A minimal DQN agent (epsilon-greedy + replay buffer + target network).
-# ---------------------------------------------------------------------------
 class DQNAgent:
     def __init__(self, state_dim: int, action_dim: int, seed: int = 0):
         self.action_dim = action_dim
@@ -130,39 +107,44 @@ class DQNAgent:
             self.target_net.load_state_dict(self.policy_net.state_dict())
         self.eps = max(self.eps_min, self.eps * self.eps_decay)
 
-
-# ---------------------------------------------------------------------------
-# 3. Reward shaping.  Dense signal = goals + possession + forward progress.
-#    (Rewrite freely — see examples/reward_examples.py for more ideas.)
-# ---------------------------------------------------------------------------
-def my_reward(prev_obs, action, obs, info, team) -> float:
+def my_reward(prev_obs, action, obs, info, team, slot) -> float:
     other = "B" if team == "A" else "A"
     prev = info.get("_prev_score", {"A": 0, "B": 0})
     now = info["score"]
     reward = 40.0 * (now[team] - prev[team]) - 40.0 * (now[other] - prev[other])
 
-    any_ball = False
-    for ag in info.get("agents", []):
-        if ag.get("has_ball"):
-            any_ball = True
-            reward += 0.15
-    # Move toward a loose ball when nobody on our side holds it.
-    dists = [ag["ball_distance"] for ag in info.get("agents", [])
-             if ag.get("ball_distance") is not None]
-    if not any_ball and dists:
-        prev_d = info.get("_prev_ball_dist")
-        if prev_d is not None:
-            reward += (prev_d - min(dists)) * 0.18
-    if info.get("_prev_has_ball") and not any_ball:
-        reward -= 0.8
+    my_agent = next((a for a in info.get("agents", []) if a.get("slot") == slot), {})
     
-    # Forward progress for the carrier
-    attack_dx = 1.0 if team == "A" else -1.0
-    for ag in info.get("agents", []):
-        if ag.get("has_ball"):
-            ori = ag.get("orientation", 0.0)
-            reward += max(0.0, math.cos(math.radians(ori)) * attack_dx) * 0.4
-    # Small nudge to SHOOT (9) / PASS (10), tiny penalty for spinning (8).
+    if slot == 0:
+        gk_x = my_agent.get("gk_x")
+        if gk_x is not None:
+            if team == "A" and gk_x > -0.8: 
+                reward -= 2.0 * (gk_x - (-0.9))
+            elif team == "B" and gk_x < 0.8:
+                reward -= 2.0 * (0.9 - gk_x)
+        
+        ball_dist = my_agent.get("ball_distance")
+        if ball_dist is not None and ball_dist < 0.3:
+            prev_dist = info.get("_prev_ball_dist", ball_dist)
+            if prev_dist is None: prev_dist = ball_dist
+            reward += (prev_dist - ball_dist) * 0.5
+        return float(reward)
+
+    has_ball = my_agent.get("has_ball", False)
+    ball_dist = my_agent.get("ball_distance")
+    
+    if has_ball:
+        reward += 0.25
+        attack_dx = 1.0 if team == "A" else -1.0
+        ori = my_agent.get("orientation", 0.0)
+        reward += max(0.0, math.cos(math.radians(ori)) * attack_dx) * 0.4
+    elif ball_dist is not None:
+        prev_d = info.get("_prev_ball_dist")
+        if prev_d is not None and ball_dist < 0.5:
+            all_dists = [a.get("ball_distance", 999.0) for a in info.get("agents", []) if a.get("ball_distance") is not None]
+            if all_dists and ball_dist <= min(all_dists) + 0.05:
+                reward += (prev_d - ball_dist) * 0.1
+                
     acts = list(action) if hasattr(action, "__len__") else [int(action)]
     for a in acts:
         try:
@@ -170,12 +152,9 @@ def my_reward(prev_obs, action, obs, info, team) -> float:
         except (TypeError, ValueError):
             continue
         reward += 0.10 if a == 9 else 0.08 if a == 10 else -0.02 if a == 8 else 0.0
+
     return float(reward)
 
-
-# ---------------------------------------------------------------------------
-# 4. Train each requested slot and save its weights.
-# ---------------------------------------------------------------------------
 def train():
     class Args: pass
     args = Args()
@@ -202,8 +181,10 @@ def train():
 
     for slot in slots:
         env = gym.make("FIFAWorldCupAgent-v0", slots=[slot],
+                       feature_fn=my_features,
                        opponent_style="aggressive", max_ticks=args.ticks,
-                       reward_fn=my_reward, seed=args.seed + slot)
+                       reward_fn=lambda p, a, o, i, t, s=slot: my_reward(p, a, o, i, t, s),
+                       seed=args.seed + slot)
         agent = DQNAgent(STATE_DIM, ACTION_DIM, seed=args.seed + slot)
         for ep in range(1, args.episodes + 1):
             obs, _ = env.reset(seed=args.seed + slot * 1000 + ep)
@@ -223,7 +204,6 @@ def train():
         env.close()
 
     print(f"Done — {len(slots)} weight file(s) in {save_dir}")
-
 
 if __name__ == "__main__":
     train()

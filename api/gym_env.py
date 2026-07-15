@@ -353,6 +353,8 @@ class FIFAWorldCupAgentEnv(gym.Env if _GYM else object):
                 "ball_distance": (ball_sector.get("distance")
                                   if ball_sector else None),
                 "orientation": st.get("current_orientation", 0.0),
+                "gk_x": st.get("gk_x"),
+                "gk_y": st.get("gk_y"),
             })
         return {
             "tick": self.game.tick,
