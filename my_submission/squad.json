@@ -1,0 +1,132 @@
+[
+  {
+    "role": "GK",
+    "x": 4,
+    "y": 30,
+    "reflexes": 100,
+    "positioning": 100,
+    "agility": 80,
+    "handling": 10,
+    "distribution": 10
+  },
+  {
+    "role": "DEFENDER",
+    "x": 16,
+    "y": 12,
+    "tackling": 100,
+    "running": 80,
+    "pass_accuracy": 60,
+    "vision": 80,
+    "pass_range": 50,
+    "dribbling": 10,
+    "shot_power": 40
+  },
+  {
+    "role": "DEFENDER",
+    "x": 16,
+    "y": 24,
+    "tackling": 100,
+    "running": 80,
+    "pass_accuracy": 60,
+    "vision": 80,
+    "pass_range": 50,
+    "dribbling": 10,
+    "shot_power": 40
+  },
+  {
+    "role": "DEFENDER",
+    "x": 16,
+    "y": 36,
+    "tackling": 100,
+    "running": 80,
+    "pass_accuracy": 60,
+    "vision": 80,
+    "pass_range": 50,
+    "dribbling": 10,
+    "shot_power": 40
+  },
+  {
+    "role": "DEFENDER",
+    "x": 16,
+    "y": 48,
+    "tackling": 100,
+    "running": 80,
+    "pass_accuracy": 60,
+    "vision": 80,
+    "pass_range": 50,
+    "dribbling": 10,
+    "shot_power": 40
+  },
+  {
+    "role": "MIDFIELDER",
+    "x": 32,
+    "y": 18,
+    "vision": 100,
+    "pass_accuracy": 100,
+    "pass_range": 100,
+    "running": 80,
+    "dribbling": 10,
+    "shot_power": 20,
+    "tackling": 10
+  },
+  {
+    "role": "MIDFIELDER",
+    "x": 32,
+    "y": 30,
+    "running": 100,
+    "tackling": 80,
+    "pass_accuracy": 80,
+    "vision": 60,
+    "pass_range": 40,
+    "dribbling": 30,
+    "shot_power": 30
+  },
+  {
+    "role": "MIDFIELDER",
+    "x": 32,
+    "y": 42,
+    "running": 100,
+    "tackling": 80,
+    "pass_accuracy": 80,
+    "vision": 60,
+    "pass_range": 40,
+    "dribbling": 30,
+    "shot_power": 30
+  },
+  {
+    "role": "ATTACKER",
+    "x": 46,
+    "y": 20,
+    "running": 100,
+    "dribbling": 80,
+    "pass_accuracy": 60,
+    "vision": 60,
+    "shot_power": 60,
+    "pass_range": 20,
+    "tackling": 40
+  },
+  {
+    "role": "ATTACKER",
+    "x": 48,
+    "y": 30,
+    "shot_power": 100,
+    "running": 100,
+    "dribbling": 80,
+    "pass_accuracy": 60,
+    "pass_range": 10,
+    "tackling": 10,
+    "vision": 60
+  },
+  {
+    "role": "ATTACKER",
+    "x": 46,
+    "y": 40,
+    "running": 100,
+    "dribbling": 80,
+    "pass_accuracy": 60,
+    "vision": 60,
+    "shot_power": 60,
+    "pass_range": 20,
+    "tackling": 40
+  }
+]

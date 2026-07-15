@@ -1,0 +1,114 @@
+{
+  "match_id": "9a292cdac041417481b81377922d241c",
+  "teams": {
+    "home": "SuperHeuristic",
+    "away": "Demo"
+  },
+  "score": {
+    "home": 8,
+    "away": 0
+  },
+  "winner": "home",
+  "winner_name": "SuperHeuristic",
+  "decided_by": "regulation",
+  "shootout": null,
+  "duration_ticks": 1800,
+  "duration": "90:00",
+  "stats": {
+    "possession_pct": {
+      "home": 21.2,
+      "away": 78.8
+    },
+    "shots": {
+      "home": 15,
+      "away": 0
+    },
+    "shots_on_target": {
+      "home": 12,
+      "away": 0
+    },
+    "passes": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 0,
+      "away": 0
+    },
+    "offsides": {
+      "home": 0,
+      "away": 0
+    },
+    "throw_ins": {
+      "home": 0,
+      "away": 0
+    },
+    "goal_kicks": {
+      "home": 0,
+      "away": 5
+    },
+    "tackles": {
+      "home": 0,
+      "away": 10
+    }
+  },
+  "goals": [
+    {
+      "tick": 925,
+      "clock": "46:15",
+      "half": "2",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 944,
+      "clock": "47:12",
+      "half": "2",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 987,
+      "clock": "49:21",
+      "half": "2",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 1021,
+      "clock": "51:03",
+      "half": "2",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 1058,
+      "clock": "52:54",
+      "half": "2",
+      "team": "home",
+      "scorer": "TeamA_Player_10"
+    },
+    {
+      "tick": 1077,
+      "clock": "53:51",
+      "half": "2",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 1111,
+      "clock": "55:33",
+      "half": "2",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 1186,
+      "clock": "59:18",
+      "half": "2",
+      "team": "home",
+      "scorer": null
+    }
+  ],
+  "generated_at": null
+}

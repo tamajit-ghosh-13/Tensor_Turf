@@ -1,0 +1,93 @@
+{
+  "match_id": "89bbe3693de24b38a4dfddd23b63af73",
+  "teams": {
+    "home": "Tactical Split",
+    "away": "Demo"
+  },
+  "score": {
+    "home": 1,
+    "away": 4
+  },
+  "winner": "away",
+  "winner_name": "Demo",
+  "decided_by": "regulation",
+  "shootout": null,
+  "duration_ticks": 1800,
+  "duration": "90:00",
+  "stats": {
+    "possession_pct": {
+      "home": 56.5,
+      "away": 43.5
+    },
+    "shots": {
+      "home": 2,
+      "away": 5
+    },
+    "shots_on_target": {
+      "home": 1,
+      "away": 4
+    },
+    "passes": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 0,
+      "away": 0
+    },
+    "offsides": {
+      "home": 0,
+      "away": 0
+    },
+    "throw_ins": {
+      "home": 0,
+      "away": 1
+    },
+    "goal_kicks": {
+      "home": 1,
+      "away": 1
+    },
+    "tackles": {
+      "home": 13,
+      "away": 7
+    }
+  },
+  "goals": [
+    {
+      "tick": 49,
+      "clock": "02:27",
+      "half": "1",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 986,
+      "clock": "49:18",
+      "half": "2",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 1021,
+      "clock": "51:03",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 1054,
+      "clock": "52:42",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 1088,
+      "clock": "54:24",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    }
+  ],
+  "generated_at": null
+}

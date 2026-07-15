@@ -1,0 +1,114 @@
+{
+  "match_id": "b473255d91fa413fb0332c173569eae9",
+  "teams": {
+    "home": "Advanced Hybrid 7-Agent",
+    "away": "Demo"
+  },
+  "score": {
+    "home": 2,
+    "away": 6
+  },
+  "winner": "away",
+  "winner_name": "Demo",
+  "decided_by": "regulation",
+  "shootout": null,
+  "duration_ticks": 1800,
+  "duration": "90:00",
+  "stats": {
+    "possession_pct": {
+      "home": 51.7,
+      "away": 48.3
+    },
+    "shots": {
+      "home": 4,
+      "away": 17
+    },
+    "shots_on_target": {
+      "home": 2,
+      "away": 10
+    },
+    "passes": {
+      "home": 3,
+      "away": 0
+    },
+    "corners": {
+      "home": 0,
+      "away": 0
+    },
+    "offsides": {
+      "home": 0,
+      "away": 2
+    },
+    "throw_ins": {
+      "home": 0,
+      "away": 1
+    },
+    "goal_kicks": {
+      "home": 4,
+      "away": 2
+    },
+    "tackles": {
+      "home": 7,
+      "away": 15
+    }
+  },
+  "goals": [
+    {
+      "tick": 82,
+      "clock": "04:06",
+      "half": "1",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 287,
+      "clock": "14:21",
+      "half": "1",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 321,
+      "clock": "16:03",
+      "half": "1",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 354,
+      "clock": "17:42",
+      "half": "1",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 388,
+      "clock": "19:24",
+      "half": "1",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 422,
+      "clock": "21:06",
+      "half": "1",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 455,
+      "clock": "22:45",
+      "half": "1",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 634,
+      "clock": "31:42",
+      "half": "1",
+      "team": "home",
+      "scorer": null
+    }
+  ],
+  "generated_at": null
+}
