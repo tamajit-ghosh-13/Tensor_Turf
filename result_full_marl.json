@@ -1,0 +1,65 @@
+{
+  "match_id": "cd8dd13e19d24106bcda72fc82d897e7",
+  "teams": {
+    "home": "Full MARL Team",
+    "away": "Demo"
+  },
+  "score": {
+    "home": 0,
+    "away": 1
+  },
+  "winner": "away",
+  "winner_name": "Demo",
+  "decided_by": "overtime",
+  "shootout": null,
+  "duration_ticks": 1834,
+  "duration": "91:42",
+  "stats": {
+    "possession_pct": {
+      "home": 96.9,
+      "away": 3.1
+    },
+    "shots": {
+      "home": 0,
+      "away": 2
+    },
+    "shots_on_target": {
+      "home": 0,
+      "away": 1
+    },
+    "passes": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 0,
+      "away": 0
+    },
+    "offsides": {
+      "home": 0,
+      "away": 0
+    },
+    "throw_ins": {
+      "home": 0,
+      "away": 0
+    },
+    "goal_kicks": {
+      "home": 1,
+      "away": 0
+    },
+    "tackles": {
+      "home": 4,
+      "away": 5
+    }
+  },
+  "goals": [
+    {
+      "tick": 1834,
+      "clock": "91:42",
+      "half": "ET",
+      "team": "away",
+      "scorer": null
+    }
+  ],
+  "generated_at": null
+}
