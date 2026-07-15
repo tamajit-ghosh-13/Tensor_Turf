@@ -239,8 +239,8 @@ class FIFAWorldCupAgentEnv(gym.Env if _GYM else object):
     def _make_game(self, ep_seed: int) -> None:
         squad_a = generate_squad("A", rng=random.Random(ep_seed))
         squad_b = generate_squad("B", rng=random.Random(ep_seed + 1))
-        from .test_agents import make_policy
-        opp_policy = make_policy(self.opponent_style, squad_b, seed=ep_seed + 2)
+        from .agents import make_policy
+        opp_policy = make_policy(squad_b, seed=ep_seed + 2)
         # Team A's policy is a shim: controlled slots use env-supplied actions,
         # the other slots run the teammate baseline.
         self._shim = _SlotShim(squad_a, set(self.slots), self.teammate_style,
@@ -380,8 +380,8 @@ class _SlotShim:
                  seed: int):
         self.squad = squad
         self.controlled = controlled_slots
-        from .test_agents import make_policy
-        self._baseline = make_policy(teammate_style, squad, seed=seed)
+        from .agents import make_policy
+        self._baseline = make_policy(squad, seed=seed)
         self._pending: List[Optional[Dict[str, Any]]] = []
 
     def set_actions(self, actions: List[Optional[Dict[str, Any]]]):

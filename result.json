@@ -1,0 +1,79 @@
+{
+  "match_id": "c1b298e3a1584b5c9a5db4ef317ad037",
+  "teams": {
+    "home": "My Team",
+    "away": "Demo"
+  },
+  "score": {
+    "home": 2,
+    "away": 1
+  },
+  "winner": "home",
+  "winner_name": "My Team",
+  "decided_by": "overtime",
+  "shootout": null,
+  "duration_ticks": 2047,
+  "duration": "102:21",
+  "stats": {
+    "possession_pct": {
+      "home": 12.8,
+      "away": 87.2
+    },
+    "shots": {
+      "home": 7,
+      "away": 3
+    },
+    "shots_on_target": {
+      "home": 1,
+      "away": 2
+    },
+    "passes": {
+      "home": 1,
+      "away": 0
+    },
+    "corners": {
+      "home": 0,
+      "away": 0
+    },
+    "offsides": {
+      "home": 0,
+      "away": 0
+    },
+    "throw_ins": {
+      "home": 1,
+      "away": 6
+    },
+    "goal_kicks": {
+      "home": 1,
+      "away": 6
+    },
+    "tackles": {
+      "home": 26,
+      "away": 7
+    }
+  },
+  "goals": [
+    {
+      "tick": 932,
+      "clock": "46:36",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 1005,
+      "clock": "50:15",
+      "half": "2",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 2047,
+      "clock": "102:21",
+      "half": "ET",
+      "team": "home",
+      "scorer": null
+    }
+  ],
+  "generated_at": null
+}

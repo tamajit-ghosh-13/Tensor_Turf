@@ -1,0 +1,93 @@
+{
+  "match_id": "7928bf77cc874b3098921a427956250d",
+  "teams": {
+    "home": "Slots 9+5+6",
+    "away": "Demo"
+  },
+  "score": {
+    "home": 2,
+    "away": 3
+  },
+  "winner": "away",
+  "winner_name": "Demo",
+  "decided_by": "overtime",
+  "shootout": null,
+  "duration_ticks": 1833,
+  "duration": "91:39",
+  "stats": {
+    "possession_pct": {
+      "home": 25.7,
+      "away": 74.3
+    },
+    "shots": {
+      "home": 3,
+      "away": 14
+    },
+    "shots_on_target": {
+      "home": 2,
+      "away": 5
+    },
+    "passes": {
+      "home": 1,
+      "away": 0
+    },
+    "corners": {
+      "home": 0,
+      "away": 0
+    },
+    "offsides": {
+      "home": 0,
+      "away": 0
+    },
+    "throw_ins": {
+      "home": 0,
+      "away": 0
+    },
+    "goal_kicks": {
+      "home": 1,
+      "away": 1
+    },
+    "tackles": {
+      "home": 8,
+      "away": 5
+    }
+  },
+  "goals": [
+    {
+      "tick": 932,
+      "clock": "46:36",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 1143,
+      "clock": "57:09",
+      "half": "2",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 1259,
+      "clock": "62:57",
+      "half": "2",
+      "team": "home",
+      "scorer": null
+    },
+    {
+      "tick": 1292,
+      "clock": "64:36",
+      "half": "2",
+      "team": "away",
+      "scorer": null
+    },
+    {
+      "tick": 1833,
+      "clock": "91:39",
+      "half": "ET",
+      "team": "away",
+      "scorer": null
+    }
+  ],
+  "generated_at": null
+}

@@ -1,0 +1,65 @@
+{
+  "match_id": "5799fc1ede944ad88e4cb618dc0bd3b7",
+  "teams": {
+    "home": "Slots 9+5",
+    "away": "Demo"
+  },
+  "score": {
+    "home": 1,
+    "away": 0
+  },
+  "winner": "home",
+  "winner_name": "Slots 9+5",
+  "decided_by": "regulation",
+  "shootout": null,
+  "duration_ticks": 1800,
+  "duration": "90:00",
+  "stats": {
+    "possession_pct": {
+      "home": 12.3,
+      "away": 87.7
+    },
+    "shots": {
+      "home": 3,
+      "away": 4
+    },
+    "shots_on_target": {
+      "home": 1,
+      "away": 1
+    },
+    "passes": {
+      "home": 2,
+      "away": 0
+    },
+    "corners": {
+      "home": 0,
+      "away": 0
+    },
+    "offsides": {
+      "home": 0,
+      "away": 0
+    },
+    "throw_ins": {
+      "home": 0,
+      "away": 0
+    },
+    "goal_kicks": {
+      "home": 2,
+      "away": 2
+    },
+    "tackles": {
+      "home": 6,
+      "away": 4
+    }
+  },
+  "goals": [
+    {
+      "tick": 966,
+      "clock": "48:18",
+      "half": "2",
+      "team": "home",
+      "scorer": null
+    }
+  ],
+  "generated_at": null
+}
